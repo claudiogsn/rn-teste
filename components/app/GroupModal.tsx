@@ -24,7 +24,7 @@ export default function GroupModal({ open, onClose }: Props) {
 
     setLoading(true);
 
-    getGroupsByUnit(unit.id, user.token)
+    getGroupsByUnit(user.id, user.token)
       .then((list) => setGroups(list))
       .catch((err) => {
         console.error("Erro ao carregar grupos", err);
@@ -63,7 +63,7 @@ export default function GroupModal({ open, onClose }: Props) {
               >
                 <FontAwesome5 name="layer-group" size={16} color="#0B46AC" />
                 <Text className="ml-3 text-sm font-semibold text-foreground">
-                  {g.id} – {g.name}
+                  {g.id} – {g.nome}
                 </Text>
               </Pressable>
             ))}

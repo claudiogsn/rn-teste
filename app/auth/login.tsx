@@ -130,11 +130,11 @@ export default function LoginScreen() {
           </Text>
 
           <Text className="text-muted mb-6">
-            Faça login para acessar o dashboard.
+            Faça login para acessar o sistema.
           </Text>
 
           <Card>
-            <CardHeader title="Login" subtitle={subtitle} />
+            <CardHeader title="Login" />
 
             <View className="gap-4">
               <Input
@@ -172,9 +172,7 @@ export default function LoginScreen() {
                 onPress={handleSubmit(onSubmit)}
               />
 
-              <Text className="text-muted text-xs">
-                * App de teste para validação de fluxo e arquitetura.
-              </Text>
+              <Text className="text-muted text-xs"></Text>
             </View>
           </Card>
         </View>

@@ -13,8 +13,6 @@ module.exports = function (api) {
           },
         },
       ],
-      "expo-router/babel",
-      // tem que ser o ÚLTIMO
       "react-native-reanimated/plugin",
     ],
   };

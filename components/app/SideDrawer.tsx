@@ -40,7 +40,7 @@ export default function SideDrawer({ open, onClose }: Props) {
   function handleLogout() {
     onClose();
     logout();
-    router.replace("/login");
+    router.replace("/auth/login");
   }
 
   return (
@@ -110,7 +110,7 @@ export default function SideDrawer({ open, onClose }: Props) {
             label="Dashboard"
             onPress={() => {
               onClose();
-              navigate("dashboard");
+              navigate("home");
             }}
           />
         </View>

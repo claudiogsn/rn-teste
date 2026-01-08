@@ -8,10 +8,10 @@ import { useContextStore } from "@/lib/contextStore";
 import { useNavStore } from "@/lib/navigationStore";
 
 import UnitModal from "@/components/app/UnitModal";
+import GroupModal from "@/components/app/GroupModal"; // 👈 1. Importação
 import SideDrawer from "@/components/app/SideDrawer";
 
 import "../../global.css";
-
 
 export default function AppLayout() {
   const router = useRouter();
@@ -22,10 +22,11 @@ export default function AppLayout() {
 
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [unitOpen, setUnitOpen] = useState(false);
+  const [groupOpen, setGroupOpen] = useState(false); // 👈 2. Novo estado
 
   // 🔐 proteção
   if (!user) {
-    return <Redirect href="/login" />;
+    return <Redirect href="/auth/login" />;
   }
 
   // 🔁 sincroniza store → router
@@ -43,7 +44,7 @@ export default function AppLayout() {
     <View className="flex-1 bg-background">
       {/* ================= HEADER ================= */}
       <View className="bg-primary px-4 pt-6 pb-4 flex-row items-center justify-between">
-        {/* MENU */}
+        {/* MENU LATERAL (Left) */}
         <Pressable
           onPress={() => setDrawerOpen(true)}
           className="w-10 h-10 items-center justify-center rounded-xl bg-white/15"
@@ -98,22 +99,26 @@ export default function AppLayout() {
           onPress={() => navigate("home")}
         />
 
+        {/* 👇 3. Aqui trocamos "Menus" por "Grupo" */}
         <BottomButton
-          icon="th-large"
-          label="Menus"
-          onPress={() => navigate("menus")}
+          icon="layer-group"
+          label="Grupo"
+          onPress={() => setGroupOpen(true)}
         />
       </View>
 
       {/* ================= MODAIS ================= */}
       <SideDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} />
       <UnitModal open={unitOpen} onClose={() => setUnitOpen(false)} />
+
+      {/* 👇 4. Adicionamos o modal na árvore */}
+      <GroupModal open={groupOpen} onClose={() => setGroupOpen(false)} />
     </View>
   );
 }
 
 /* -------------------------------------------------------------------------- */
-/* COMPONENTES                                                                 */
+/* COMPONENTES AUXILIARES                                                      */
 /* -------------------------------------------------------------------------- */
 
 function BottomButton({

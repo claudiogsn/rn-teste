@@ -174,17 +174,18 @@ export type Group = {
 };
 
 export async function getGroupsByUnit(
-  systemUnitId: number,
+  userId: number,
   token: string,
 ): Promise<Group[]> {
-  const r = await post<{ success: boolean; groups?: any[] }>(
-    "getGroupsByUnit",
-    { system_unit_id: systemUnitId },
+  const r = await post<{ success: boolean; grupos?: any[] }>(
+    "getGroupByUser",
+    { user_id: userId },
     token,
   );
 
-  if (!r.success || !Array.isArray(r.groups)) return [];
-  return r.groups as Group[];
+  console.log("gruposs", r.grupos);
+
+  return r.grupos as Group[];
 }
 
 

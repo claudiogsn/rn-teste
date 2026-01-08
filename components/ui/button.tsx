@@ -13,7 +13,15 @@ export function Button(props: {
   size?: Size;
   style?: ViewStyle;
 }) {
-  const { title, onPress, disabled, loading, variant = "default", size = "md", style } = props;
+  const {
+    title,
+    onPress,
+    disabled,
+    loading,
+    variant = "default",
+    size = "md",
+    style,
+  } = props;
 
   const base = "rounded-xl items-center justify-center flex-row";
   const sizes: Record<Size, string> = {
@@ -26,8 +34,10 @@ export function Button(props: {
     outline: "bg-transparent border border-border",
     destructive: "bg-danger",
   };
+
+  // 👇 AQUI FOI A ALTERAÇÃO: de "text-black" para "text-white"
   const textVariants: Record<Variant, string> = {
-    default: "text-black",
+    default: "text-white",
     outline: "text-foreground",
     destructive: "text-white",
   };
@@ -47,11 +57,20 @@ export function Button(props: {
     >
       {loading ? (
         <>
-          <ActivityIndicator />
-          <Text className={["ml-2 font-semibold", textVariants[variant]].join(" ")}>{title}</Text>
+          {/* Adicionei color="#fff" para o loading ficar branco também nos botões com fundo colorido */}
+          <ActivityIndicator
+            color={variant === "outline" ? undefined : "#fff"}
+          />
+          <Text
+            className={["ml-2 font-semibold", textVariants[variant]].join(" ")}
+          >
+            {title}
+          </Text>
         </>
       ) : (
-        <Text className={["font-semibold", textVariants[variant]].join(" ")}>{title}</Text>
+        <Text className={["font-semibold", textVariants[variant]].join(" ")}>
+          {title}
+        </Text>
       )}
     </Pressable>
   );
